@@ -79,7 +79,7 @@ def call(Map config = [:]) {
                 steps {
                     script {
 					
-                        sh "trivy image ${config.application}:latest"
+                       sh "TMPDIR=/var/lib/trivy-tmp trivy --cache-dir /var/lib/trivy image ${config.application}:latest"
                     }
                 }
             }
