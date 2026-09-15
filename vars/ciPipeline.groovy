@@ -88,7 +88,7 @@ def call(Map config = [:]) {
                 steps {
                     script {
 
-						def ecrRegistry = "YOUR_ACCOUNT_ID.dkr.ecr.${config.awsRegion}.amazonaws.com"
+						def ecrRegistry = "080665850643.dkr.ecr.${config.awsRegion}.amazonaws.com"
 
 						sh """
 							aws ecr get-login-password --region ${config.awsRegion} | \
