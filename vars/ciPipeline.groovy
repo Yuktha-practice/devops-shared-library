@@ -89,7 +89,7 @@ def call(Map config = [:]) {
 				                        ${mvn}/bin/mvn clean verify sonar:sonar \
 				                        -Dsonar.projectKey=${config.sonarProjectKey}
 				                    """
-
+								}
                         } else if (config.type == 'database') {
 
                             echo 'SonarQube analysis skipped for database repository'
