@@ -3,7 +3,9 @@ def call(Map config = [:]) {
     pipeline {
 
         agent any
-
+		tools {
+	 		maven 'mymaven'
+	 	}
         stages {
 
             stage('Clean Workspace') {
@@ -82,7 +84,6 @@ def call(Map config = [:]) {
 
                         } else if (config.type == 'java') {
 
-                            def mvn = tool 'mymaven'
 
 				                withSonarQubeEnv('mysonar') {
 				                    sh """
