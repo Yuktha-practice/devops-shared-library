@@ -82,12 +82,13 @@ def call(Map config = [:]) {
 
                         } else if (config.type == 'java') {
 
-                            withSonarQubeEnv('mysonar') {
-                                sh """
-                                    ./mvnw sonar:sonar \
-                                    -Dsonar.projectKey=${config.sonarProjectKey}
-                                """
-                            }
+                            def mvn = tool 'mymaven'
+
+				                withSonarQubeEnv('mysonar') {
+				                    sh """
+				                        ${mvn}/bin/mvn clean verify sonar:sonar \
+				                        -Dsonar.projectKey=${config.sonarProjectKey}
+				                    """
 
                         } else if (config.type == 'database') {
 
