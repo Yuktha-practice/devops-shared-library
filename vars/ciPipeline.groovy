@@ -86,7 +86,7 @@ def call(Map config = [:]) {
 
 				                withSonarQubeEnv('mysonar') {
 				                    sh """
-				                        ${mvn}/bin/mvn clean verify sonar:sonar \
+				                        mvn clean verify sonar:sonar \
 				                        -Dsonar.projectKey=${config.sonarProjectKey}
 				                    """
 								}
