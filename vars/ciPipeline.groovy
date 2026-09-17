@@ -71,7 +71,7 @@ def call(Map config = [:]) {
 
                         if (config.type == 'node') {
 
-                            def scannerHome = tool 'SonarScanner'
+                            def scannerHome = tool 'mysonar'
 
                             withSonarQubeEnv('mysonar') {
                                 sh """
