@@ -64,6 +64,40 @@ def call(Map config = [:]) {
                     }
                 }
             }
+			
+			stage('CQA - SonarQube') {
+                steps {
+                    script {
+
+                        if (config.type == 'node') {
+
+                            def scannerHome = tool 'SonarScanner'
+
+                            withSonarQubeEnv('mysonar') {
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=${config.sonarProjectKey}
+                                """
+                            }
+
+                        } else if (config.type == 'java') {
+
+                            withSonarQubeEnv('mysonar') {
+                                sh """
+                                    ./mvnw sonar:sonar \
+                                    -Dsonar.projectKey=${config.sonarProjectKey}
+                                """
+                            }
+
+                        } else if (config.type == 'database') {
+
+                            echo 'SonarQube analysis skipped for database repository'
+                        }
+                    }
+                }
+            }
+			
+			
 
             stage('Docker Build') {
                 steps {
